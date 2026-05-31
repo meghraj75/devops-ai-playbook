@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: boutique-services
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - boutique
+  selector:
+    matchLabels:
+      app: gateway   
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+# a Custom Resource Definition (CRD) introduced by the Prometheus Operator. 
+# It allows you to declaratively define how a group of Kubernetes services should be monitored by Prometheus.
