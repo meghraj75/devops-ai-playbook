@@ -30,36 +30,51 @@ module "ecr" {
 }
 
 
-# data "aws_eks_cluster_auth" "eks" {
-#   name = module.eks.cluster_name
-# }
+data "aws_eks_cluster_auth" "eks" {
+  name = module.eks.cluster_name
+}
 
-# provider "kubernetes" {
-#   alias                  = "eks"
-#   host                   = module.eks.cluster_endpoint
-#   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-#   token                  = data.aws_eks_cluster_auth.eks.token
-# }
+provider "kubernetes" {
+  alias                  = "eks"
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+  token                  = data.aws_eks_cluster_auth.eks.token
+}
 
-# provider "helm" {
-#   alias = "eks"
+provider "helm" {
+  alias = "eks"
 
-#   kubernetes =  {
-#     host                   = module.eks.cluster_endpoint
-#     cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-#     token                  = data.aws_eks_cluster_auth.eks.token
-#   }
-# }
+  kubernetes =  {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    token                  = data.aws_eks_cluster_auth.eks.token
+  }
+}
 
 
-# module "argocd" {
-#   source = "./modules/argocd"
+module "argocd" {
+  source = "./modules/argocd"
 
-#   providers = {
-#     kubernetes = kubernetes.eks
-#     helm       = helm.eks
-#   }
+  providers = {
+    kubernetes = kubernetes.eks
+    helm       = helm.eks
+  }
 
-#   depends_on = [module.eks]
-# }
+  depends_on = [module.eks]
+}
 
+module "aws_secret_manager" {
+
+  source = "./modules/aws-secret-manager"
+
+  secret_name = "prod/database/credentials"
+
+  username = var.username
+  password = var.password
+
+  oidc_provider_arn = module.eks.oidc_provider_arn
+  oidc_provider_url = module.eks.oidc_provider_url
+
+  namespace            = "external-secrets"
+  service_account_name = "external-secrets"
+}

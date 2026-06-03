@@ -65,3 +65,11 @@ variable "disk_size" {
 variable "repositories" {
   type = list(string)
 }
+
+variable "username" {
+  sensitive = true
+}
+
+variable "password" {
+  sensitive = true
+}
