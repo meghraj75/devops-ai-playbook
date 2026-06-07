@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: external-secrets
+  namespace: boutique
+
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/prod-database-credentials-irsa-role

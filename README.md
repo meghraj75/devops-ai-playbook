@@ -109,7 +109,26 @@ Then we actually build the project. You'll see:
 - Infrastructure provisioning with Terraform
 - Observability with Prometheus and Grafana
 
+  1  create docker images for each services 
+  2 create infra as per design 
+         terraform init
+         terraform plan
+         terrafrom apply --auto=approve
+  3 cicd pipleine through github actions
+         configure on env in github 
+         trigger pipeline after creating infra 
+        git commit --allow-empty "trigger cicd pipeline"
+        git push origin main
+
+ 4 to connect with eks cluster on local machine
+        -update config file 
+         aws eks update-kubeconfig --region us-east-1 --name eks-cluster
+    to deploy k8 manifest use this command
+     kubectl apply -k /gitops    -k expects a Kustomize directory.
+ 
 ---
+
+
 
 ### Part 4 — AIOps Integration
 [`projects/aiops-assistant/README.md`](projects/aiops-assistant/README.md)

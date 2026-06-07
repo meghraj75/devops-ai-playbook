@@ -5,7 +5,9 @@ namespace: boutique
 
 resources:
   - namespace.yml
-  - secrets.yml
+  - k8s/external-secret/svc-account.yml
+  - k8s/external-secret/secret-store.yml
+  - k8s/external-secret/externalsecret.yml
   - k8s/database/statefulset.yml
   - k8s/database/service.yml
   - k8s/backend/gateway.yml

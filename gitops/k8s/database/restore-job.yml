@@ -62,7 +62,7 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: boutique-secrets
+                  name: db-secret
                   key: POSTGRES_PASSWORD
           volumeMounts:
             - name: dump
