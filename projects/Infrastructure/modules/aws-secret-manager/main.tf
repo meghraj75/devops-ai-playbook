@@ -12,8 +12,14 @@ resource "aws_secretsmanager_secret_version" "this" {
   secret_id = aws_secretsmanager_secret.this.id
 
   secret_string = jsonencode({
-    username = var.username
-    password = var.password
+    POSTGRES_DB       = "boutique"
+    POSTGRES_USER     = var.username
+    POSTGRES_PASSWORD = var.password
+
+    AUTH_DB_URL       = "postgres://${var.username}:${var.password}@boutique-postgres:5432/auth"
+    PRODUCTS_DB_URL   = "postgres://${var.username}:${var.password}@boutique-postgres:5432/products"
+    ORDERS_DB_URL     = "postgres://${var.username}:${var.password}@boutique-postgres:5432/orders"
+    USERS_DB_URL      = "postgres://${var.username}:${var.password}@boutique-postgres:5432/users"
   })
 }
 

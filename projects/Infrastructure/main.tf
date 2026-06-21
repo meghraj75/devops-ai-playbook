@@ -75,6 +75,6 @@ module "aws_secret_manager" {
   oidc_provider_arn = module.eks.oidc_provider_arn
   oidc_provider_url = module.eks.oidc_provider_url
 
-  namespace            = "external-secrets"
+  namespace            = "boutique"
   service_account_name = "external-secrets"
 }
