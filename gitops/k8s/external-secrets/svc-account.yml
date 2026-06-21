@@ -6,4 +6,4 @@ metadata:
   namespace: boutique
 
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/prod-database-credentials-irsa-role
+    eks.amazonaws.com/role-arn: arn:aws:iam::929082011881:role/prod-database-credentials-irsa-role
