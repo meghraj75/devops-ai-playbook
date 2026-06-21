@@ -126,6 +126,9 @@ Then we actually build the project. You'll see:
     to deploy k8 manifest use this command
      kubectl apply -k /gitops    -k expects a Kustomize directory.
  
+ install helm char for crd exteranl secret 
+
+ note for external secret we need one more node so increase capacity 2 inside tfvars 
 ---
 
 
