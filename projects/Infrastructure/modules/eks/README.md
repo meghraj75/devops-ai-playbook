@@ -34,4 +34,4 @@ terraform plan
 terraform apply --auto-approve
 
 update the cluster and we can access it directly command connects your local machine to your Amazon Web Services EKS Kubernetes cluster.
-aws eks update-kubeconfig --region us-east-1 --name eks-cluster 
+aws eks update-kubeconfig --region us-east-1 --name eks-cluster admin admin 
